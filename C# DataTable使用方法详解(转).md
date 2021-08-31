@@ -1,4 +1,4 @@
-# C# DataTable使用方法详解(转)
+# C# DataTable使用方法详解
 
 在项目中常常常使用到DataTable,假设DataTable使用得当，不仅能使程序简洁有用，并且可以提高性能，达到事半功倍的效果，现对DataTable的使用技巧进行一下总结。
 
