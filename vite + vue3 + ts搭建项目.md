@@ -2,25 +2,33 @@
 
 ### 使用 Vite 快速搭建
 
- Npm
 
-`npm init @vitejs/app`
 
- Yarn
+```
+Npm
+npm init @vitejs/app`
 
-`yarn create @vitejs/app`
+Yarn
+yarn create @vitejs/app
+```
 
-输入项目名称
+ 
 
 选择vue- vue-ts
 
 安装依赖
 
-`npm install`
+```
+npm install
+```
 
 启动项目
 
-`npm run dev`
+```
+npm run dev
+```
+
+
 
 ### 修改 Vite 配置文件
 
@@ -66,7 +74,6 @@ ts
  * @FilePath: \vue-vite-blog\src\env.d.ts
  */
 /// <reference types="vite/client" />
-
 declare module '*.vue' {
   import { DefineComponent } from 'vue'
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
@@ -119,7 +126,7 @@ export default router
 
 ```
 
-1. main.ts 文件中挂载
+main.ts 文件中挂载
 
 ```ts
 import { createApp } from 'vue'
@@ -164,7 +171,7 @@ export default createStore({
 })
 ```
 
-**main.ts 文件挂载**
+main.ts 文件挂载
 
 ```tsx
 import { createApp } from 'vue'
@@ -322,6 +329,49 @@ app.config.globalProperties.$api = axios
 
 ```
 npm i sass -D
+```
+
+
+
+### 环境变量配置
+
+#### .env.development
+
+```javascript
+// .env.development
+//测试环境地址
+NODE_ENV = development
+VITE_API_DOMAIN = 'https://localhost:5001/'
+```
+
+#### .env.production
+
+```javascript
+NODE_ENV = production
+VITE_API_DOMAIN = 'http://8081/'//正式环境地址
+```
+
+#### 在页面中使用
+
+```typescript
+console.log(import.meta.env.VITE_APP_WEB_URL)
+```
+
+#### 在 `package.json `中使用
+
+```json
+"scripts":{
+  "build:dev": "vite build --mode development",
+  "build:pro": "vite build --mode production"
+}
+```
+
+#### env.d.ts
+
+```ts
+interface ImportMetaEnv {
+  VITE_API_DOMAIN: string,
+}
 ```
 
 
@@ -505,8 +555,7 @@ module.exports = {
 
 
 
-
-## 配置GZIP压缩
+### 配置GZIP压缩
 
 安装依赖
 
@@ -531,5 +580,36 @@ plugins:[
   })
 ]
 ```
+
+### webpack 代理配置
+
+配置 `vite.config.ts` 文件
+
+```typescript
+server: {
+    host: '0.0.0.0',
+    port: 3000,
+    open: true,
+    https: false,
+    proxy: {}
+},
+```
+
+### 生产环境移除 console
+
+配置 `vite.config.ts` 文件
+
+```typescript
+build:{
+  ...
+  terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+  }
+}
+```
+
 
 
