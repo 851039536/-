@@ -987,4 +987,3 @@ f_pData=”SN0001;C2001,M2001,K2001;”
 | OK;                                 | OK                   |
 | NG;SN:‘SN’, ATT:‘Att. SN’ not match | 組立SN與附件SN不匹配 |
 
-
