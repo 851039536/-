@@ -1,19 +1,23 @@
 ### 定义委托
 
+ 定义了一个参数是string ，无返回值的委托，名为 SendMessageToChildForms。
+
 ```c#
- public delegate void SendMessageToChildForms(string s); //定义了一个参数是string ，无返回值的委托，名为 SendMessageToChildForms。
+ public delegate void SendMessageToChildForms(string s);
 ```
 
 ### 委托实例化
 
+本质就是实例化了一个事件event
+
 ```c#
-// 本质就是实例化了一个事件event
- public event SendMessageToChildForms smtcf_event;
+public event SendMessageToChildForms smtcf_event;
 ```
 
 
 
-###   定义具体执行的方法
+###   执行的方法
+
 ```c#
 public void ToShowGetMessage(string s)
 {
@@ -23,9 +27,11 @@ public void ToShowGetMessage(string s)
 
 ### 绑定方法
 
+在一实例化的一个委托事件上绑定子窗体的具体方法
+
 ```c#
  Parameter frm_child = new Parameter();
-            smtcf_event += frm_child.ToShowGetMessage; //在一实例化的一个委托事件上绑定子窗体的具体方法
+            smtcf_event += frm_child.ToShowGetMessage; 
             frm_child.Show();
 ```
 
@@ -37,3 +43,4 @@ public void ToShowGetMessage(string s)
             smtcf_event.Invoke("12212");// 可以省略Invoke 简写为smtcf(this.textBox1.Text.Trim());
         }
 ```
+
