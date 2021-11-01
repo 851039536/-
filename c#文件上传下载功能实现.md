@@ -1,30 +1,28 @@
 # c#文件上传下载功能实现
 
-## NuGet 安装SqlSugar
+### NuGet 安装SqlSugar
 
-### Model文件下新建 DbContext 类
+Model文件下新建 DbContext 类
 
 ```c#
- public class DbContext
-    {
-        public DbContext()
-        {
-            Db = new SqlSugarClient(new ConnectionConfig()
-            {
-                ConnectionString = "server=localhost;uid=root;pwd=woshishui;database=test",
-                DbType = DbType.MySql,
-                InitKeyType = InitKeyType.Attribute,//从特性读取主键和自增列信息
-                IsAutoCloseConnection = true,//开启自动释放模式和EF原理一样我就不多解释了
-
-            });
-            //调式代码 用来打印SQL 
-            Db.Aop.OnLogExecuting = (sql, pars) =>
-            {
-                Console.WriteLine(sql + "\r\n" +
+public class DbContext 
+{
+	public DbContext() 
+	{
+		Db = new SqlSugarClient(new ConnectionConfig() 
+		{
+			ConnectionString = "server=localhost;uid=root;pwd=woshishui;database=test",
+			                DbType = DbType.MySql,
+			                InitKeyType = InitKeyType.Attribute,//从特性读取主键和自增列信息
+			IsAutoCloseConnection = true,//开启自动释放模式和EF原理一样我就不多解释了
+			});
+			//调式代码 用来打印SQL 
+			Db.Aop.OnLogExecuting = (sql, pars) =>
+			            {
+			                Console.WriteLine(sql + "rn" +
                                   Db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
                 Console.WriteLine();
             };
-
         }
         //注意：不能写成静态的，不能写成静态的
         public SqlSugarClient Db;//用来处理事务多表查询和复杂的操作
@@ -32,13 +30,12 @@
     }
 ```
 
-### 建uploading实体类
+### uploading实体类
 
 ```c#
 [SugarTable("uploading")]
    public class uploading
     {
-
         //指定主键和自增列，当然数据库中也要设置主键和自增列才会有效
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public int id { get; set; }
@@ -47,7 +44,7 @@
     }
 ```
 
-### Manager文件下建UploadingManager
+### UploadingManager
 
 ```c#
  class UploadingManager : DbContext
@@ -70,7 +67,6 @@
                 Console.WriteLine(e);
                 throw;
             }
-
         }
 
         public List<string> GetName(string name)
@@ -80,16 +76,15 @@
                 .Select(f => f.path)
                 .ToList();
             return data;
-
         }
     }
 ```
 
 
 
-## 窗体加载Form1_Load
+### 窗体加载
 
-### 读取到数据库字段name并赋值
+ 读取到数据库字段name并赋值
 
 ```c#
  private void Form1_Load(object sender, EventArgs e)
@@ -104,9 +99,7 @@
         }
 ```
 
-
-
-### comboBox事件触发条件查询到上传的path
+ comboBox事件触发条件查询到上传的path
 
 ```c#
  private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -141,13 +134,11 @@
                 {
                     aimPath += System.IO.Path.DirectorySeparatorChar;
                 }
-
                 // 判断目标目录是否存在如果不存在则新建
                 if (!System.IO.Directory.Exists(aimPath))
                 {
                     System.IO.Directory.CreateDirectory(aimPath);
                 }
-
                 // 得到源目录的文件列表，该里面是包含文件以及目录路径的一个数组
                 // 如果你指向copy目标文件下面的文件而不包含目录请使用下面的方法
                 // string[] fileList = Directory.GetFiles（srcPath）；
@@ -159,7 +150,6 @@
                     if (System.IO.Directory.Exists(file))
                     {
                         CopyDir(file, aimPath + System.IO.Path.GetFileName(file));
-
                         DisplaylistboxMsg("上传成功");
                     }
                     // 否则直接Copy文件

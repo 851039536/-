@@ -1,8 +1,8 @@
-# c#文件压缩解压
+# c#文件压缩/解压
 
 ### 压缩
 
-```c#
+```js
 private void skinButton1_Click(object sender, EventArgs e)
         {
             FilesUploadFor.ZipDirectory(foldertozip.Text,zipedfilename.Text);
@@ -12,8 +12,10 @@ private void skinButton1_Click(object sender, EventArgs e)
 
 ### ZipDirectory
 
-```c#
-  //===================================================压缩用的是库函数
+压缩用的是库函数
+
+```js
+
        /// <summary>
        /// 压缩文件夹
        /// </summary>
@@ -23,7 +25,6 @@ private void skinButton1_Click(object sender, EventArgs e)
         {
             ZipDirectory(folderToZip, zipedFileName, string.Empty, true, string.Empty, string.Empty, true);
         }
- 
  
         /// <summary>
         /// 压缩文件夹
@@ -47,7 +48,7 @@ private void skinButton1_Click(object sender, EventArgs e)
 
 ### 解压缩
 
-```c#
+```js
   private void skinButton2_Click(object sender, EventArgs e)
         {
             filesUploadFor.UnZip(zipedfilename.Text,"");
@@ -57,8 +58,10 @@ private void skinButton1_Click(object sender, EventArgs e)
 
 ### UnZip
 
-```c#
-  //===================================================解压用的是库函数
+解压用的是库函数
+
+```js
+
         /// <summary>  
         /// 功能：解压zip格式的文件。  
         /// </summary>  
