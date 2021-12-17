@@ -63,7 +63,6 @@
             return {
                 newinfo: [],
                 Labels: [],
-
                 //每页展示多少内容
                 perPage: 10000,
                 // 总页数
@@ -76,7 +75,6 @@
                 totalPage:[],
                 // 当前显示的数据
                 dataShow:[]
-
             }
         },
             
@@ -87,7 +85,6 @@
             nextPage: function(){
                 var vm = this;
                 if (vm.currentPage == vm.pageNum - 1) return;
-
                 vm.dataShow = vm.totalPage[++vm.currentPage]
             },
             prePage: function(){
@@ -129,7 +126,6 @@
                 }).then(res => {
                     // 只获取0到4之间的数据
                     this.dataShow = res.data.slice(0, 4);
-
                 }).catch((e) => {
                     console.log(e + '获取数据失败');
                 });

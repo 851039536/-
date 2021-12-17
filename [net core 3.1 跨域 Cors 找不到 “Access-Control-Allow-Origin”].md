@@ -1,7 +1,5 @@
 原文:[net core 3.1 跨域 Cors 找不到 “Access-Control-Allow-Origin”](https://www.cnblogs.com/xiaotimor/p/12068984.html)
 
-
-
 ### 首先在ConfigureServices添加
 
 
@@ -33,11 +31,7 @@ public void ConfigureServices(IServiceCollection services)
 
 
 
-
-
 ### 然后新增CorsMiddleware 类
-
-
 
 ```c#
 public class CorsMiddleware
@@ -47,7 +41,6 @@ public class CorsMiddleware
         {
             _next = next;
         }
-
         public async Task Invoke(HttpContext context)
         {
             if (!context.Response.Headers.ContainsKey("Access-Control-Allow-Origin"))
@@ -58,10 +51,6 @@ public class CorsMiddleware
         }
     }
 ```
-
-
-
-
 
 ### 然后在Configure 使用中间件
 
